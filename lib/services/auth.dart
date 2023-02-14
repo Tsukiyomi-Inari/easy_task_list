@@ -8,8 +8,9 @@ class AuthService {
   // Sign in  as anon
   Future signInAnon() async{
     try{
-       final result = await _auth.signInAnonymously();
-      print('Signed in with anon account.');
+       UserCredential result = await _auth.signInAnonymously();
+       User? user = result.user;
+       return user;
   }on FirebaseAuthException catch(error){
     switch (error.code) {
       case "operation-not-allowed":
