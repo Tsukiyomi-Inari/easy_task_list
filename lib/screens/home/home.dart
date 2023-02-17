@@ -1,20 +1,26 @@
+import 'package:easy_task_list/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_task_list/constants/colors.dart';
 import 'package:easy_task_list/widgets/task_item.dart';
-
 import '../../model/task.dart';
+import 'package:easy_task_list/services/auth.dart';
 
 class Home extends StatefulWidget {
   Home({Key? key}) : super(key: key);
 
   @override
   State<Home> createState() => _HomeState();
+
+
 }
 
 class _HomeState extends State<Home> {
   final taskList = Task.taskList();
   final _taskController = TextEditingController();
+
   List<Task> _foundTask = [];
+  final AuthService _auth = AuthService();
+
 
   @override
   void initState() {
@@ -150,6 +156,8 @@ class _HomeState extends State<Home> {
     });
   }
 
+
+
   //App Bar
   AppBar _buildAppBar() {
     return AppBar(
@@ -162,9 +170,16 @@ class _HomeState extends State<Home> {
           style: TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
-          ),)
+          ),),
         ],
       ),
+      actions: <Widget>[
+        IconButton(
+            onPressed: () async{
+              await _auth.signOut();
+            },
+            icon: const Icon(Icons.logout),
+        )],
     );
   }
 
@@ -203,5 +218,6 @@ class _HomeState extends State<Home> {
   }
 
 }
+
 
 

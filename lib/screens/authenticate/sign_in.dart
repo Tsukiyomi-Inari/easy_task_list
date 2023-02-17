@@ -9,7 +9,16 @@ class SignIn  extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
+
   final AuthService _auth =  AuthService();
+
+  // Text field state
+  String email = '';
+  String password = '';
+
+  // show the password or not
+  bool _isObscure = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,6 +40,7 @@ class _SignInState extends State<SignIn> {
 ),
   body: Container(
     padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
+   //Anon Sign In
     child: ElevatedButton(
       onPressed: () async {
         dynamic result = await _auth.signInAnon();
@@ -48,6 +58,53 @@ class _SignInState extends State<SignIn> {
       ),
       child: const Text('Sign In Anon',style: TextStyle(fontSize: 20),),
     ),
+    /*child: Form(
+      child: Column(
+        children:  <Widget>[
+          const SizedBox(height: 20.0),
+          TextFormField(
+            onChanged: (val) {
+              setState(() => email = val);
+            },
+            decoration: const InputDecoration(
+              hintText: 'E-mail',
+            ),
+          ),
+          const SizedBox(height: 20.0),
+          TextFormField(
+            obscureText: _isObscure,
+            onChanged: (val) {
+              setState(() => password = val);
+            },
+            decoration: InputDecoration(
+              hintText: 'Password',
+              suffixIcon: IconButton(
+                icon: Icon(
+                  _isObscure ? Icons.visibility_off : Icons.visibility),
+                onPressed: () {
+                  setState(() {
+                    _isObscure = !_isObscure;
+                  });
+                },
+              )
+            ),
+          ),
+          const SizedBox(height: 20.0),
+          ElevatedButton(
+          onPressed: ()async {
+            print(email );
+          },
+              style: ElevatedButton.styleFrom(
+              backgroundColor: todoMint,
+              minimumSize: const Size(60, 60),
+              elevation: 10),
+            child:const Text('Sign In',
+              style: TextStyle(fontSize: 20),
+            ),
+          )
+        ],
+      ),
+    ),*/
 ),
     );
   }
