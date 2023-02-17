@@ -40,7 +40,7 @@ class _SignInState extends State<SignIn> {
 ),
   body: Container(
     padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
-   //Anon Sign In
+   /*//Anon Sign In
     child: ElevatedButton(
       onPressed: () async {
         dynamic result = await _auth.signInAnon();
@@ -57,8 +57,8 @@ class _SignInState extends State<SignIn> {
         elevation: 10
       ),
       child: const Text('Sign In Anon',style: TextStyle(fontSize: 20),),
-    ),
-    /*child: Form(
+    ),*/
+    child: Form(
       child: Column(
         children:  <Widget>[
           const SizedBox(height: 20.0),
@@ -68,6 +68,7 @@ class _SignInState extends State<SignIn> {
             },
             decoration: const InputDecoration(
               hintText: 'E-mail',
+              //TODO: TEXT MASK AND VALIDATION
             ),
           ),
           const SizedBox(height: 20.0),
@@ -92,7 +93,8 @@ class _SignInState extends State<SignIn> {
           const SizedBox(height: 20.0),
           ElevatedButton(
           onPressed: ()async {
-            print(email );
+            print("EMAIL: " + email + "\n" +
+                  "PASS : " + password);
           },
               style: ElevatedButton.styleFrom(
               backgroundColor: todoMint,
@@ -104,7 +106,7 @@ class _SignInState extends State<SignIn> {
           )
         ],
       ),
-    ),*/
+    ),
 ),
     );
   }
