@@ -42,9 +42,28 @@ Stream<UserModel?> get onAuthStateChanged{
 
 
   //sign in  with email + pass
+Future signIn(String email, String password) async {
+    try{
+      return await _auth.signInWithEmailAndPassword(email: email, password: password);
+    }catch(error){
+      print(error.toString());
+      return null;
+    }
+}
+
 
   //register with email + pass
+  Future registerWithEmailAndPassword(String email, String password) async {
+    try{
+      UserCredential result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
+      User user = result.user!;
 
+      return _userModelFromFirebase(user);
+    }catch(error) {
+      print(error.toString());
+      return null;
+    }
+  }
   //sign out
 
   Future signOut() async {
