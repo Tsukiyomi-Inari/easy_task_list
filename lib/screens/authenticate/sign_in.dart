@@ -1,9 +1,14 @@
+import 'package:easy_task_list/screens/authenticate/register.dart';
 import 'package:easy_task_list/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_task_list/constants/colors.dart';
 
 
 class SignIn  extends StatefulWidget {
+
+  final Function toggleView;
+  const SignIn({required this.toggleView});
+
   @override
   _SignInState createState() => _SignInState();
 }
@@ -11,10 +16,12 @@ class SignIn  extends StatefulWidget {
 class _SignInState extends State<SignIn> {
 
   final AuthService _auth =  AuthService();
+  final _formKey = GlobalKey<FormState>();
 
   // Text field state
   String email = '';
   String password = '';
+  String error = '';
 
   // show the password or not
   bool _isObscure = true;
@@ -35,8 +42,16 @@ class _SignInState extends State<SignIn> {
         fontSize: 24,
         fontWeight: FontWeight.bold,
       ),)
-      ],
-      )
+      ],),
+      actions: <Widget>[
+        TextButton.icon(
+          onPressed: (){widget.toggleView();},
+          style: TextButton.styleFrom(
+            foregroundColor: Colors.white
+          ),
+          icon: const Icon(Icons.person),
+          label: const Text('Sign Up'),
+        )],
 ),
   body: Container(
     padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
@@ -59,21 +74,23 @@ class _SignInState extends State<SignIn> {
       child: const Text('Sign In Anon',style: TextStyle(fontSize: 20),),
     ),*/
     child: Form(
+      key: _formKey,
       child: Column(
         children:  <Widget>[
           const SizedBox(height: 20.0),
           TextFormField(
+            validator: (val) => val!.isEmpty? 'Enter an email': null,
             onChanged: (val) {
               setState(() => email = val);
             },
             decoration: const InputDecoration(
               hintText: 'E-mail',
-              //TODO: TEXT MASK AND VALIDATION
             ),
           ),
           const SizedBox(height: 20.0),
           TextFormField(
             obscureText: _isObscure,
+            validator: (val) => val!.isEmpty? 'Enter a password 6+ chars long': null,
             onChanged: (val) {
               setState(() => password = val);
             },
@@ -93,8 +110,14 @@ class _SignInState extends State<SignIn> {
           const SizedBox(height: 20.0),
           ElevatedButton(
           onPressed: ()async {
-            print("EMAIL: " + email + "\n" +
-                  "PASS : " + password);
+            if(_formKey.currentState!.validate()){
+              dynamic result = await _auth.signIn(email, password);
+              if(result == null){
+                setState(() {
+                  error = 'Could not sign in with the credentials';
+                });
+              }
+            }
           },
               style: ElevatedButton.styleFrom(
               backgroundColor: todoMint,
@@ -103,6 +126,11 @@ class _SignInState extends State<SignIn> {
             child:const Text('Sign In',
               style: TextStyle(fontSize: 20),
             ),
+          ),
+          const SizedBox(height: 12.0),
+          Text(
+            error,
+            style: const TextStyle(color: todoRed, fontSize: 14.0),
           )
         ],
       ),
