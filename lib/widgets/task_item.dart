@@ -1,4 +1,4 @@
-import 'package:easy_task_list/constants/colors.dart';
+import 'package:easy_task_list/shared/colors.dart';
 import 'package:flutter/material.dart';
 import '../model/task.dart';
 

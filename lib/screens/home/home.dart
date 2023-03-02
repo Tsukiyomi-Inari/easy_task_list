@@ -1,6 +1,6 @@
 import 'package:easy_task_list/services/auth.dart';
 import 'package:flutter/material.dart';
-import 'package:easy_task_list/constants/colors.dart';
+import 'package:easy_task_list/shared/colors.dart';
 import 'package:easy_task_list/widgets/task_item.dart';
 import '../../model/task.dart';
 import 'package:easy_task_list/services/auth.dart';

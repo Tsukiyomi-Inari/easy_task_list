@@ -1,7 +1,8 @@
 import 'package:easy_task_list/screens/authenticate/register.dart';
 import 'package:easy_task_list/services/auth.dart';
 import 'package:flutter/material.dart';
-import 'package:easy_task_list/constants/colors.dart';
+import 'package:easy_task_list/shared/colors.dart';
+import 'package:easy_task_list/shared/elements.dart';
 
 
 class SignIn  extends StatefulWidget {
@@ -83,9 +84,7 @@ class _SignInState extends State<SignIn> {
             onChanged: (val) {
               setState(() => email = val);
             },
-            decoration: const InputDecoration(
-              hintText: 'E-mail',
-            ),
+            decoration: textInputDecoration.copyWith(hintText: 'E-mail'),
           ),
           const SizedBox(height: 20.0),
           TextFormField(
@@ -93,19 +92,20 @@ class _SignInState extends State<SignIn> {
             validator: (val) => val!.isEmpty? 'Enter a password 6+ chars long': null,
             onChanged: (val) {
               setState(() => password = val);
+
             },
-            decoration: InputDecoration(
-              hintText: 'Password',
+            decoration: textInputDecoration.copyWith(hintText: 'Password',
               suffixIcon: IconButton(
-                icon: Icon(
+              icon: Icon(
                   _isObscure ? Icons.visibility_off : Icons.visibility),
-                onPressed: () {
-                  setState(() {
-                    _isObscure = !_isObscure;
-                  });
-                },
-              )
-            ),
+              onPressed: () {
+                setState(() {
+                  _isObscure = !_isObscure;
+                });
+              },
+              focusColor: todoMint,
+                color: todoMint,
+            ),)
           ),
           const SizedBox(height: 20.0),
           ElevatedButton(
@@ -114,7 +114,7 @@ class _SignInState extends State<SignIn> {
               dynamic result = await _auth.signIn(email, password);
               if(result == null){
                 setState(() {
-                  error = 'Could not sign in with the credentials';
+                  error = 'Could not sign in with those credentials';
                 });
               }
             }

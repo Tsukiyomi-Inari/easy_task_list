@@ -1,7 +1,8 @@
-import 'package:easy_task_list/screens/authenticate/sign_in.dart';
+import 'package:easy_task_list/shared/elements.dart';
 import 'package:easy_task_list/services/auth.dart';
+import 'package:easy_task_list/shared/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:easy_task_list/constants/colors.dart';
+
 
 class Register extends StatefulWidget{
 
@@ -65,9 +66,7 @@ class _RegisterState extends State<Register> {
                 onChanged: (val) {
                   setState(() => email = val);
                 },
-                decoration: const InputDecoration(
-                  hintText: 'E-mail',
-                ),
+                decoration: textInputDecoration.copyWith(hintText: 'E-mail'),
               ),
               const SizedBox(height: 20.0),
               TextFormField(
@@ -76,18 +75,18 @@ class _RegisterState extends State<Register> {
                 onChanged: (val) {
                   setState(() => password = val);
                 },
-                decoration: InputDecoration(
-                    hintText: 'Password',
-                    suffixIcon: IconButton(
-                      icon: Icon(
-                          _isObscure ? Icons.visibility_off : Icons.visibility),
-                      onPressed: () {
-                        setState(() {
-                          _isObscure = !_isObscure;
-                        });
-                      },
-                    )
-                ),
+                decoration: textInputDecoration.copyWith(hintText: 'Password',
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                        _isObscure ? Icons.visibility_off : Icons.visibility),
+                    onPressed: () {
+                      setState(() {
+                        _isObscure = !_isObscure;
+                      });
+                    },
+                    focusColor: todoMint,
+                    color: todoMint,
+                  ),)
               ),
               const SizedBox(height: 20.0),
               ElevatedButton(

@@ -8,3 +8,4 @@ const Color transparentMint  = Color(0xFFFFFFFF);
 const Color greySearch = Color(0xFF2D2D2D);
 
 const Color todoBackground = Color(0xFF837C7C);
+
