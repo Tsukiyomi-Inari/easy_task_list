@@ -1,11 +1,19 @@
+/// @authors  Katherine Bellman
+/// @date    February 13th 2023
+/// @description  Auth Service to interact with Firebase Authentication - methods etc
+///
 
+import 'package:easy_task_list/services/database.dart';
 import 'package:easy_task_list/model/usermodel.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:easy_task_list/model/task.dart';
+
 
 
 class AuthService {
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
+
 
   //create userModel obj on Firebase User
   UserModel? _userModelFromFirebase(User? user){
@@ -58,12 +66,18 @@ Future signIn(String email, String password) async {
       UserCredential result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
       User user = result.user!;
 
+    /*  //Create a new document for user with their uid
+         await DatabaseService(uid: user.uid).updateUserData(Task.taskList().first) + DatabaseService(uid: user.uid).updateUserData(Task.taskList().last);
+*/
       return _userModelFromFirebase(user);
     }catch(error) {
       print(error.toString());
       return null;
     }
   }
+
+
+
   //sign out
 
   Future signOut() async {

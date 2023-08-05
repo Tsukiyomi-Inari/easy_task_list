@@ -1,3 +1,8 @@
+/// @authors  Katherine Bellman
+/// @date    February 13th 2023
+/// @description  Root widget
+///
+
 import 'package:easy_task_list/screens/wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -18,22 +23,29 @@ void main() async {
 
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({key}) : super(key: key);
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
-    return  StreamProvider<UserModel?>.value(
-      initialData: null,
-      value: AuthService().onAuthStateChanged,
-      builder: (context, snapshot) {
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'Easy Task List',
-          home: Wrapper(),
-        );
-      }
+    return MultiProvider(
+        providers: [
+
+    StreamProvider<UserModel?>.value(
+    initialData: null,
+        value: AuthService().onAuthStateChanged,
+        builder: (context, snapshot) {
+          return const MaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: 'Easy Task List',
+            home: Wrapper(),
+          );
+        }
+    )
+        ]
     );
+
+
   }
 }

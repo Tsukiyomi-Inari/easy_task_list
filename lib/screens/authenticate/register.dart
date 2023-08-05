@@ -1,13 +1,20 @@
+/// @authors  Katherine Bellman
+/// @date    February 13th 2023
+/// @description  Registration widget with signin form
+///
+
 import 'package:easy_task_list/shared/elements.dart';
 import 'package:easy_task_list/services/auth.dart';
 import 'package:easy_task_list/shared/colors.dart';
 import 'package:flutter/material.dart';
 
+import '../../shared/loading.dart';
+
 
 class Register extends StatefulWidget{
 
   final Function toggleView;
-  const Register({required this.toggleView});
+  const Register({super.key, required this.toggleView});
 
   @override
   _RegisterState createState() =>  _RegisterState();
@@ -29,7 +36,7 @@ class _RegisterState extends State<Register> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return loading ? const Loading() : Scaffold(
       backgroundColor: transparentMint,
       appBar: AppBar(
           backgroundColor: todoMint,
@@ -38,7 +45,7 @@ class _RegisterState extends State<Register> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: const [
-              Text('Sign up to Easy Task List',
+              Text('Register',
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,

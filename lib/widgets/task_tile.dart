@@ -2,12 +2,17 @@ import 'package:easy_task_list/shared/colors.dart';
 import 'package:flutter/material.dart';
 import '../model/task.dart';
 
-class TaskItem extends StatelessWidget {
-  final Task task;
-  final onTaskChanged;
-  final onDeleteTask;
+class TaskTile extends StatelessWidget {
 
-  const  TaskItem({Key? key, required this.task, required this.onDeleteTask, required this.onTaskChanged}) : super(key:key);
+
+  @override
+
+  const  TaskTile({Key? key, required this.task, /*required this.onDeleteTask, required this.onTaskChanged*/}) : super(key:key);
+
+  final Task task;
+ /* final onTaskChanged;
+  final onDeleteTask;*/
+
 
   @override
   Widget build(BuildContext context){
@@ -15,7 +20,7 @@ class TaskItem extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 20),
       child: ListTile(
         onTap: () {
-          onTaskChanged(task);
+          //onTaskChanged(task);
         },
         shape: RoundedRectangleBorder(borderRadius:BorderRadius.circular(20)
         ),
@@ -46,7 +51,7 @@ class TaskItem extends StatelessWidget {
             iconSize: 18,
             icon: const Icon(Icons.delete),
             onPressed: () {
-              onDeleteTask(task.id);
+              //onDeleteTask(task.id);
             },
           ),
         ),

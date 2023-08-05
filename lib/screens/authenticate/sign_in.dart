@@ -1,14 +1,19 @@
-import 'package:easy_task_list/screens/authenticate/register.dart';
+/// @authors  Katherine Bellman
+/// @date    February 13th 2023
+/// @description  Signin widget with form
+///
 import 'package:easy_task_list/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_task_list/shared/colors.dart';
 import 'package:easy_task_list/shared/elements.dart';
 
+import '../../shared/loading.dart';
+
 
 class SignIn  extends StatefulWidget {
 
   final Function toggleView;
-  const SignIn({required this.toggleView});
+  const SignIn({super.key, required this.toggleView});
 
   @override
   _SignInState createState() => _SignInState();
@@ -18,6 +23,7 @@ class _SignInState extends State<SignIn> {
 
   final AuthService _auth =  AuthService();
   final _formKey = GlobalKey<FormState>();
+  bool loading = false;
 
   // Text field state
   String email = '';
@@ -29,7 +35,7 @@ class _SignInState extends State<SignIn> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return loading ? const Loading() : Scaffold(
     backgroundColor: transparentMint,
     appBar: AppBar(
       backgroundColor: todoMint,
@@ -38,7 +44,7 @@ class _SignInState extends State<SignIn> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: const [
-        Text('Sign in to Easy Task List',
+        Text('Sign in',
         style: TextStyle(
         fontSize: 24,
         fontWeight: FontWeight.bold,
@@ -76,6 +82,8 @@ class _SignInState extends State<SignIn> {
     ),*/
     child: Form(
       key: _formKey,
+    child: SingleChildScrollView(
+    padding: const EdgeInsets.all(16),
       child: Column(
         children:  <Widget>[
           const SizedBox(height: 20.0),
@@ -111,10 +119,12 @@ class _SignInState extends State<SignIn> {
           ElevatedButton(
           onPressed: ()async {
             if(_formKey.currentState!.validate()){
+              setState( ()=> loading = true);
               dynamic result = await _auth.signIn(email, password);
               if(result == null){
                 setState(() {
                   error = 'Could not sign in with those credentials';
+                  loading = false;
                 });
               }
             }
@@ -134,6 +144,7 @@ class _SignInState extends State<SignIn> {
           )
         ],
       ),
+    ),
     ),
 ),
     );

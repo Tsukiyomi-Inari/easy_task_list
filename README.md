@@ -1,16 +1,53 @@
-# easy_task_list
 
-A new Flutter project.
+# Easy Task List
 
-## Getting Started
+## Development Concept
 
-This project is a starting point for a Flutter application.
+ A simple task list android application built with Flutter. 
+ 
+Tasks are temporary in the first version (prior to added firebase changes) but functionality for a user to register, sign-in and have their tasks saved to their account is in the works.
 
-A few resources to get you started if this is your first Flutter project:
+## Table of Contents
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- [Easy Task List](#easy-task-list)
+  - [Development Concept](#development-concept)
+  - [Table of Contents](#table-of-contents)
+  - [Technologies](#technologies)
+  - [Features](#features)
+  - [Future-Updates](#future-updates)
+  - [Acknowledgments](#acknowledgments)
+  - [Licence](#licence)
+  - [🤝 Support](#-support)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Technologies
+
+[![Tech Used](https://skillicons.dev/icons?i=androidstudio,firebase,figma,flutter,gcp,postman)](https://skillicons.dev)
+
+## Features
+
+- Add Tasks
+- Delete Tasks
+- Mark Task as Complete
+- User Registration
+- User Sign-in
+- Task search
+- User Log-out
+
+## Future-Updates
+
+- Tasks saved to user account
+- Startup screen
+- Google authentication
+
+## Acknowledgments
+
+- [Udemy Course - "Flutter & Dart - The Complete Guide [2023 Edition]" by Maximilian Schwarzmüller](https://www.udemy.com/course/learn-flutter-dart-to-build-ios-android-apps/)
+- 
+
+## Licence
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+## 🤝 Support
+
+Give a ⭐️ if you like this project!
